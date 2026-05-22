@@ -11,6 +11,7 @@ public class Vehicle {
 
     private String vehicleNumber;
     private int capacity;
+    private String vehicleType;
     private String status;
 
     public Vehicle() {
@@ -34,6 +35,14 @@ public class Vehicle {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public String getStatus() {
