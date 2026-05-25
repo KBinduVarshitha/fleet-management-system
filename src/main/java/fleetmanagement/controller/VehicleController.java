@@ -23,4 +23,17 @@ public class VehicleController {
     public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
         return vehicleService.saveVehicle(vehicle);
     }
+
+    @PutMapping("/{id}")
+    public Vehicle updateVehicle(@PathVariable Long id, @RequestBody Vehicle updatedVehicle) {
+
+        Vehicle vehicle = vehicleService.getVehicleById(id);
+
+        vehicle.setVehicleNumber(updatedVehicle.getVehicleNumber());
+        vehicle.setCapacity(updatedVehicle.getCapacity());
+        vehicle.setVehicleType(updatedVehicle.getVehicleType());
+        vehicle.setStatus(updatedVehicle.getStatus());
+
+        return vehicleService.saveVehicle(vehicle);
+    }
 }
