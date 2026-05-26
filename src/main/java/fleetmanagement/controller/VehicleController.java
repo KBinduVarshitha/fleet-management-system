@@ -36,4 +36,12 @@ public class VehicleController {
 
         return vehicleService.saveVehicle(vehicle);
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteVehicle(@PathVariable Long id) {
+
+        vehicleService.deleteVehicle(id);
+
+        return "Vehicle deleted successfully";
+    }
 }
