@@ -1,13 +1,21 @@
 package fleetmanagement.exception;
 
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public String handleValidationException(MethodArgumentNotValidException ex) {
+        return ex.getBindingResult()
+                 .getFieldError()
+                 .getDefaultMessage();
+    }
+
     @ExceptionHandler(Exception.class)
-    public String handleException(Exception e) {
-        return e.getMessage();
+    public String handleException(Exception ex) {
+        return ex.getMessage();
     }
 }

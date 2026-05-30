@@ -20,4 +20,4 @@ public class DeliveryTaskService {
     public DeliveryTask saveTask(DeliveryTask task) {
         return deliveryTaskRepository.save(task);
     }
-}
+} 

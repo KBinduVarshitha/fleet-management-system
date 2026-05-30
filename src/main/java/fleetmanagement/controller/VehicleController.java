@@ -19,10 +19,10 @@ public class VehicleController {
         return vehicleService.getAllVehicles();
     }
 
-    @PostMapping
-    public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.saveVehicle(vehicle);
-    }
+    // @PostMapping
+    // public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
+    //     return vehicleService.saveVehicle(vehicle);
+    // }
 
     @PutMapping("/{id}")
     public Vehicle updateVehicle(@PathVariable Long id, @RequestBody Vehicle updatedVehicle) {
@@ -43,5 +43,10 @@ public class VehicleController {
         vehicleService.deleteVehicle(id);
 
         return "Vehicle deleted successfully";
+    }
+
+    @PostMapping
+    public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
+        return vehicleService.saveVehicle(vehicle);
     }
 }
