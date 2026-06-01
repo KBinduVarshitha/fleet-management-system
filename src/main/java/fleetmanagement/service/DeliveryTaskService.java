@@ -1,5 +1,6 @@
 package fleetmanagement.service;
 
+import fleetmanagement.entity.DeliveryStatus;
 import fleetmanagement.entity.DeliveryTask;
 import fleetmanagement.repository.DeliveryTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,14 @@ public class DeliveryTaskService {
     public DeliveryTask saveTask(DeliveryTask task) {
         return deliveryTaskRepository.save(task);
     }
-} 
+
+    public DeliveryTask updateStatus(Long id, DeliveryStatus status) {
+
+        DeliveryTask task = deliveryTaskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        task.setStatus(status);
+
+        return deliveryTaskRepository.save(task);
+    }
+}

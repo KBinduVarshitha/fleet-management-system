@@ -1,5 +1,6 @@
 package fleetmanagement.controller;
 
+import fleetmanagement.entity.DeliveryStatus;
 import fleetmanagement.entity.DeliveryTask;
 import fleetmanagement.service.DeliveryTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,13 @@ public class DeliveryTaskController {
     @PostMapping
     public DeliveryTask addTask(@RequestBody DeliveryTask task) {
         return deliveryTaskService.saveTask(task);
+    }
+
+    @PutMapping("/{id}/status")
+    public DeliveryTask updateStatus(
+            @PathVariable Long id,
+            @RequestParam DeliveryStatus status) {
+
+        return deliveryTaskService.updateStatus(id, status);
     }
 }

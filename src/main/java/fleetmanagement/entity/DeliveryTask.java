@@ -10,8 +10,13 @@ public class DeliveryTask {
     private Long id;
 
     private String pickupLocation;
+
     private String deliveryLocation;
-    private String taskStatus;
+
+    private String packageDetails;
+
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus status = DeliveryStatus.UNASSIGNED;
 
     public DeliveryTask() {
     }
@@ -36,11 +41,19 @@ public class DeliveryTask {
         this.deliveryLocation = deliveryLocation;
     }
 
-    public String getTaskStatus() {
-        return taskStatus;
+    public String getPackageDetails() {
+        return packageDetails;
     }
 
-    public void setTaskStatus(String taskStatus) {
-        this.taskStatus = taskStatus;
+    public void setPackageDetails(String packageDetails) {
+        this.packageDetails = packageDetails;
+    }
+
+    public DeliveryStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DeliveryStatus status) {
+        this.status = status;
     }
 }
