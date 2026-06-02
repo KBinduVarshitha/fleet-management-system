@@ -23,6 +23,13 @@ public class RouteController {
         return routeService.getAllRoutes();
     }
 
+    @GetMapping("/distance")
+    public String getDistanceMatrix(
+            @RequestParam String coordinates) {
+
+        return routeOptimizationService.getDistanceMatrix(coordinates);
+    }
+    
     @PostMapping
     public Route addRoute(@RequestBody Route route) {
         return routeService.saveRoute(route);
