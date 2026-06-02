@@ -1,76 +1,91 @@
-# Fleet Management System
+# Fleet Management and Route Optimization Engine
 
 ## Project Overview
 
-Fleet Management System is a backend-based application developed using Spring Boot and MySQL. The project helps manage vehicles, drivers, delivery tasks, and routes efficiently through REST APIs. It also includes a basic route optimization module for managing delivery paths.
+This project is a Spring Boot and MySQL based Fleet Management System developed to manage vehicles, drivers, delivery tasks, and routes. The system provides REST APIs for fleet operations and serves as the foundation for route optimization and dispatch management.
 
-
-## Technologies Used
-
-* Java
-* Spring Boot
-* MySQL
-* Spring Data JPA / Hibernate
-* Maven
-* Postman
-* GitHub
-
-
+---
 
 ## Features Implemented
 
- Vehicle Management
+### Vehicle Management
 
-* Add vehicle
+* Register new vehicles
 * View all vehicles
 * Update vehicle details
-* Delete vehicle
+* Delete vehicles
+* Track vehicle capacity, type, and status
 
 ### Driver Management
 
-* Add driver
+* Register new drivers
 * View all drivers
+* Store driver information and availability
 
 ### Delivery Task Management
 
-* Add delivery tasks
-* View delivery tasks
+* Create delivery tasks
+* View all delivery tasks
+* Track pickup and delivery locations
+* Store package details
+
+### Delivery Status Workflow
+
+Implemented delivery state management using the following statuses:
+
+* UNASSIGNED
+* DISPATCHED
+* IN_TRANSIT
+* DELIVERED
+
+Added API support to update delivery status dynamically.
 
 ### Route Management
 
-* Add routes
-* View routes
+* Create routes
+* View all routes
+* Store route information in the database
 
-### Route Optimization
+### Basic Route Optimization
 
-* Basic route optimization logic implemented
+Implemented an initial route optimization service that accepts a list of stops and returns an optimized sequence. This serves as the foundation for future integration with external routing APIs.
 
-### Exception Handling
+### Database Integration
 
-* Global exception handling added
+* MySQL database configured
+* Spring Data JPA repositories implemented
+* Automatic table creation using Hibernate
 
+### API Testing
 
+All APIs have been tested using Postman and verified with MySQL database records.
+
+---
+
+## Technology Stack
+
+* Java 17
+* Spring Boot
+* Spring Data JPA
+* MySQL
+* Maven
+* Postman
+
+---
 
 ## Project Structure
 
+```text
+controller/
+service/
+repository/
+entity/
+resources/
+```
 
-src/main/java/fleetmanagement
-│
-├── controller
-├── entity
-├── repository
-├── service
-├── exception
-└── FleetmanagementApplication.java
+The project follows a layered architecture consisting of:
 
-
-## API Endpoints
-
-### Vehicle APIs
-
-| Method | Endpoint       |
-| ------ | -------------- |
-| GET    | /vehicles      |
-| POST   | /vehicles      |
-| PUT    | /vehicles/{id} |
-| DELETE | /vehicles/{id} |
+* Controllers for REST endpoints
+* Services for business logic
+* Repositories for database access
+* Entities for database models
