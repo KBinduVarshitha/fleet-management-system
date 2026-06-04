@@ -24,11 +24,19 @@ public class RouteOptimizationService {
         return restTemplate.getForObject(url, String.class);
     }
     
-    public List<String> optimizeRoute(List<String> locations) {
+    public List<String> optimizeRoute(List<String> stops) {
 
-        List<String> optimizedRoute = new ArrayList<>(locations);
+        if (stops == null || stops.isEmpty()) {
+            return new ArrayList<>();
+        }
 
-        Collections.sort(optimizedRoute);
+        List<String> optimizedRoute = new ArrayList<>();
+
+        optimizedRoute.add(stops.get(0));
+
+        for (int i = 1; i < stops.size(); i++) {
+            optimizedRoute.add(stops.get(i));
+        }
 
         return optimizedRoute;
     }
