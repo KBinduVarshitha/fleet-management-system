@@ -9,9 +9,15 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String sourceLocation;
-    private String destinationLocation;
-    private double distance;
+    private String routeName;
+
+    @ManyToOne
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
+
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
 
     public Route() {
     }
@@ -20,27 +26,27 @@ public class Route {
         return id;
     }
 
-    public String getSourceLocation() {
-        return sourceLocation;
+    public String getRouteName() {
+        return routeName;
     }
 
-    public void setSourceLocation(String sourceLocation) {
-        this.sourceLocation = sourceLocation;
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
     }
 
-    public String getDestinationLocation() {
-        return destinationLocation;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setDestinationLocation(String destinationLocation) {
-        this.destinationLocation = destinationLocation;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
-    public double getDistance() {
-        return distance;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setDistance(double distance) {
-        this.distance = distance;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 }
