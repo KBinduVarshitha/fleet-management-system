@@ -5,6 +5,7 @@ import fleetmanagement.entity.Route;
 import fleetmanagement.service.DispatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import fleetmanagement.dto.ManifestResponse;
 
 @RestController
 @RequestMapping("/dispatch")
@@ -18,5 +19,12 @@ public class DispatchController {
             @RequestBody DispatchRequest request) {
 
         return dispatchService.assignManifest(request);
+    }
+
+    @GetMapping("/manifest/{routeId}")
+    public ManifestResponse getManifest(
+            @PathVariable Long routeId) {
+
+        return dispatchService.generateManifest(routeId);
     }
 }

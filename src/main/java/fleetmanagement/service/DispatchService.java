@@ -10,34 +10,45 @@ import fleetmanagement.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fleetmanagement.exception.ResourceNotFoundException;
-
+import fleetmanagement.dto.ManifestResponse;
 
 @Service
 public class DispatchService {
 
-    @Autowired
-    private RouteRepository routeRepository;
+        @Autowired
+        private RouteRepository routeRepository;
 
-    @Autowired
-    private DriverRepository driverRepository;
+        @Autowired
+        private DriverRepository driverRepository;
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
+        @Autowired
+        private VehicleRepository vehicleRepository;
 
-    public Route assignManifest(DispatchRequest request) {
+        public Route assignManifest(DispatchRequest request) {
 
-        Route route = routeRepository.findById(request.getRouteId())
-                .orElseThrow(() -> new ResourceNotFoundException("Route not found"));
+                Route route = routeRepository.findById(request.getRouteId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Route not found"));
 
-        Driver driver = driverRepository.findById(request.getDriverId())
-                .orElseThrow(() -> new ResourceNotFoundException("Driver not found"));
+                Driver driver = driverRepository.findById(request.getDriverId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Driver not found"));
 
-        Vehicle vehicle = vehicleRepository.findById(request.getVehicleId())
-                .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
+                Vehicle vehicle = vehicleRepository.findById(request.getVehicleId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
 
-        route.setDriver(driver);
-        route.setVehicle(vehicle);
+                route.setDriver(driver);
+                route.setVehicle(vehicle);
 
-        return routeRepository.save(route);
-    }
+                return routeRepository.save(route);
+        }
+
+        public ManifestResponse generateManifest(Long routeId) {
+
+                Route route = routeRepository.findById(routeId)
+                                .orElseThrow(() -> new ResourceNotFoundException("Route not found"));
+
+                return new ManifestResponse(
+                                route.getDriver(),
+                                route.getVehicle(),
+                                route);
+        }
 }
