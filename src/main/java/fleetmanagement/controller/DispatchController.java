@@ -27,4 +27,20 @@ public class DispatchController {
 
         return dispatchService.generateManifest(routeId);
     }
+
+    @PutMapping("/{routeId}/driver/{driverId}")
+    public Route assignDriver(
+            @PathVariable Long routeId,
+            @PathVariable Long driverId) {
+
+        return dispatchService.assignDriver(routeId, driverId);
+    }
+
+    @PutMapping("/{routeId}/vehicle/{vehicleId}")
+    public Route assignVehicle(
+            @PathVariable Long routeId,
+            @PathVariable Long vehicleId) {
+
+        return dispatchService.assignVehicle(routeId, vehicleId);
+    }
 }

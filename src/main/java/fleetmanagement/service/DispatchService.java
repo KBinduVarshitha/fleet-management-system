@@ -16,13 +16,39 @@ import fleetmanagement.dto.ManifestResponse;
 public class DispatchService {
 
         @Autowired
-        private RouteRepository routeRepository;
-
-        @Autowired
         private DriverRepository driverRepository;
 
         @Autowired
         private VehicleRepository vehicleRepository;
+
+        @Autowired
+        private RouteRepository routeRepository;
+
+        public Route assignDriver(Long routeId, Long driverId) {
+
+                Route route = routeRepository.findById(routeId)
+                                .orElseThrow(() -> new ResourceNotFoundException("Route not found"));
+
+                Driver driver = driverRepository.findById(driverId)
+                                .orElseThrow(() -> new ResourceNotFoundException("Driver not found"));
+
+                route.setDriver(driver);
+
+                return routeRepository.save(route);
+        }
+
+        public Route assignVehicle(Long routeId, Long vehicleId) {
+
+                Route route = routeRepository.findById(routeId)
+                                .orElseThrow(() -> new ResourceNotFoundException("Route not found"));
+
+                Vehicle vehicle = vehicleRepository.findById(vehicleId)
+                                .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
+
+                route.setVehicle(vehicle);
+
+                return routeRepository.save(route);
+        }
 
         public Route assignManifest(DispatchRequest request) {
 
