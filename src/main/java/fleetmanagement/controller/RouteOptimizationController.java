@@ -1,5 +1,6 @@
 package fleetmanagement.controller;
 
+import fleetmanagement.dto.RouteOptimizationResponse;
 import fleetmanagement.service.RouteOptimizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class RouteOptimizationController {
     private RouteOptimizationService optimizationService;
 
     @PostMapping
-    public List<String> optimizeRoute(@RequestBody List<String> locations) {
+    public RouteOptimizationResponse optimizeRoute(@RequestBody List<String> locations) {
 
         return optimizationService.optimizeRoute(locations);
     }

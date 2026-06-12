@@ -3,6 +3,8 @@ package fleetmanagement.service;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import fleetmanagement.dto.RouteOptimizationResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,20 +15,66 @@ public class RouteOptimizationService {
 
     public String getDistanceMatrix(String coordinates) {
 
-        String url =
-                "https://router.project-osrm.org/table/v1/driving/"
-                        + coordinates
-                        + "?annotations=distance";
+        String url = "https://router.project-osrm.org/table/v1/driving/"
+                + coordinates
+                + "?annotations=distance";
 
         return restTemplate.getForObject(url, String.class);
     }
 
-    public List<String> optimizeRoute(List<String> stops) {
+    // public List<String> optimizeRoute(List<String> stops) {
+
+    // List<String> optimizedRoute = new ArrayList<>();
+
+    // if (stops == null || stops.isEmpty()) {
+    // return optimizedRoute;
+    // }
+
+    // boolean[] visited = new boolean[stops.size()];
+
+    // int current = 0;
+
+    // optimizedRoute.add(stops.get(current));
+    // visited[current] = true;
+
+    // for (int count = 1; count < stops.size(); count++) {
+
+    // int nearestIndex = -1;
+    // double shortestDistance = Double.MAX_VALUE;
+
+    // for (int i = 0; i < stops.size(); i++) {
+
+    // if (!visited[i]) {
+
+    // double distance =
+    // calculateDistance(
+    // stops.get(current),
+    // stops.get(i));
+
+    // if (distance < shortestDistance) {
+    // shortestDistance = distance;
+    // nearestIndex = i;
+    // }
+    // }
+    // }
+
+    // current = nearestIndex;
+    // visited[current] = true;
+    // optimizedRoute.add(stops.get(current));
+    // }
+
+    // return optimizedRoute;
+    // }
+
+    public RouteOptimizationResponse optimizeRoute(List<String> stops) {
 
         List<String> optimizedRoute = new ArrayList<>();
 
         if (stops == null || stops.isEmpty()) {
-            return optimizedRoute;
+            return new RouteOptimizationResponse(
+                    "No stops provided",
+                    "Nearest Neighbor",
+                    optimizedRoute);
         }
 
         boolean[] visited = new boolean[stops.size()];
@@ -45,10 +93,9 @@ public class RouteOptimizationService {
 
                 if (!visited[i]) {
 
-                    double distance =
-                            calculateDistance(
-                                    stops.get(current),
-                                    stops.get(i));
+                    double distance = calculateDistance(
+                            stops.get(current),
+                            stops.get(i));
 
                     if (distance < shortestDistance) {
                         shortestDistance = distance;
@@ -62,7 +109,10 @@ public class RouteOptimizationService {
             optimizedRoute.add(stops.get(current));
         }
 
-        return optimizedRoute;
+        return new RouteOptimizationResponse(
+                "Route optimized successfully",
+                "Nearest Neighbor Algorithm",
+                optimizedRoute);
     }
 
     private double calculateDistance(String point1, String point2) {

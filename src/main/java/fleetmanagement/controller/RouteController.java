@@ -1,5 +1,6 @@
 package fleetmanagement.controller;
 
+import fleetmanagement.dto.RouteOptimizationResponse;
 import fleetmanagement.entity.Route;
 import fleetmanagement.service.RouteOptimizationService;
 import fleetmanagement.service.RouteService;
@@ -36,9 +37,7 @@ public class RouteController {
     }
 
     @PostMapping("/optimize")
-    public List<String> optimizeRoute(
-            @RequestBody List<String> stops) {
-
+    public RouteOptimizationResponse optimize(@RequestBody List<String> stops) {
         return routeOptimizationService.optimizeRoute(stops);
     }
 }
